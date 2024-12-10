@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація</title>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h2>Форма реєстрації</h2>
+    <form id="registrationForm">
+        <label for="username">Ім'я користувача:</label>
+
+
+<input type="text" id="username" name="username" required>
+
+
+<br>
+
+
+<label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+
+<br>
+
+        <
+<label for="password">Пароль:</label>
+
+        <
+
+
+
+
+<input type="password" id="password" name="password" required>
+
+        <
+<br>
+
+        <
+<button type="submit">Зареєструватися</button>
+    </form>
+
+
+
+
+<p id="responseMessage"></p>
+
+
+  <script>
+
+        $(document).ready(function() {
+            $('#registrationForm').on('submit', function(event) {
+                event.preventDefault(); // Відміняємо стандартну поведінку форми
+
+                const formData = {
+                    username: $('#username').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val(),
+                };
+
+                $.ajax({
+                    url: '/register/',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        $('#responseMessage').text(response.message).css('color', 'green');
+                    },
+                    error: function(xhr) {
+                        const error = xhr.responseJSON.detail || "Помилка реєстрації.";
+                        $('#responseMessage').text(error).css('color', 'red');
+                    }
+                });
+            });
+        });
+    </script>
+
+</
+</body>
+
+</html
